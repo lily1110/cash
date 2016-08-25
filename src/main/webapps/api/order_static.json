@@ -1,0 +1,14 @@
+[
+{"date":"2016-05-23","receivable":"1501","actual":"1501","orderQty":"53"},
+{"date":"2016-05-24","receivable":"3935","actual":"3515","orderQty":"95"},
+{"date":"2016-05-25","receivable":"3506","actual":"2968","orderQty":"92"},
+{"date":"2016-05-26","receivable":"3909","actual":"3578","orderQty":"105"},
+{"date":"2016-05-27","receivable":"3907","actual":"3366","orderQty":"106"},
+{"date":"2016-05-28","receivable":"4281","actual":"3563","orderQty":"95"},
+{"date":"2016-05-29","receivable":"4780","actual":"4287","orderQty":"105"},
+{"date":"2016-05-30","receivable":"3855","actual":"3283","orderQty":"86"},
+{"date":"2016-05-31","receivable":"4233","actual":"4233","orderQty":"94"},
+{"date":"2016-06-01","receivable":"3937","actual":"3937","orderQty":"102"},
+{"date":"2016-06-02","receivable":"2008","actual":"2008","orderQty":"52"},
+
+]
