@@ -2,7 +2,7 @@ var React = require("react");
 var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
 
-var Btn = React.createClass({
+var StaticItem = React.createClass({
     default:{
         title:"",
         data:"",
@@ -28,4 +28,4 @@ var Btn = React.createClass({
     },
 });
 
-module.exports = Btn;
+module.exports = StaticItem;
