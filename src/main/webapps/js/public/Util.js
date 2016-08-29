@@ -1,5 +1,6 @@
 var $ = require("jquery");
 var _ = require("underscore");
+var host_addr ="";
 module.exports = {
     sendData: function (_method, _url, _data, _success, _error) {
         var json_data = JSON.stringify(_data);
@@ -19,7 +20,7 @@ module.exports = {
     postData: function (_url, _data, _success, _error) {
         this.sendData("POST", _url, _data, _success, _error);
     },
-    deleteData = function (_url, _data, _success, _error) {
+    deleteData : function (_url, _data, _success, _error) {
 	    this.sendData("DELETE", _url, _data, _success, _error);
 	},
     putData:function (_url, _data, _success, _error) {

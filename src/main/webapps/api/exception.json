@@ -2,6 +2,6 @@
 {"exceptionId":"1","orderId":"100001","operator":"AAA","operDate":"2016-06-03","tableNo":"1","paymentType":"现金","amountActual":"133","discountAmount":"50","discountType":"赠送"},
 {"exceptionId":"3","orderId":"100002","operator":"AAA","operDate":"2016-06-03","tableNo":"2","paymentType":"现金","amountActual":"43","discountAmount":"20","discountType":"打折"},
 {"exceptionId":"4","orderId":"100003","operator":"BBB","operDate":"2016-06-03","tableNo":"3","paymentType":"现金","amountActual":"56","discountAmount":"35","discountType":"赠送"},
-{"exceptionId":"2","orderId":"100004","operator":"BBB","operDate":"2016-06-03","tableNo":"4","paymentType":"现金","amountActual":"124","discountAmount":"23","discountType":"退菜"},
+{"exceptionId":"2","orderId":"100004","operator":"BBB","operDate":"2016-06-03","tableNo":"4","paymentType":"现金","amountActual":"124","discountAmount":"23","discountType":"退菜"}
 
 ]

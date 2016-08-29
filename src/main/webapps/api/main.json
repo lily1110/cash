@@ -99,6 +99,6 @@
 {"date":"2016-05-24","hour":"16","amount":"131","discount":"0","amountActial":"131","orderQty":"3","numberBack":"3","isPaid":"1","pplNum":"12","paymentType":"优惠券","discountType":"退菜"},
 {"date":"2016-05-23","hour":"11","amount":"469","discount":"0","amountActial":"469","orderQty":"17","numberBack":"0","isPaid":"1","pplNum":"68","paymentType":"刷卡",},
 {"date":"2016-05-23","hour":"18","amount":"521","discount":"0","amountActial":"521","orderQty":"15","numberBack":"0","isPaid":"1","pplNum":"60","paymentType":"现金",},
-{"date":"2016-05-23","hour":"12","amount":"511","discount":"0","amountActial":"511","orderQty":"21","numberBack":"0","isPaid":"1","pplNum":"84","paymentType":"第三方","discountType":"0"},
+{"date":"2016-05-23","hour":"12","amount":"511","discount":"0","amountActial":"511","orderQty":"21","numberBack":"0","isPaid":"1","pplNum":"84","paymentType":"第三方","discountType":"0"}
 
 ]

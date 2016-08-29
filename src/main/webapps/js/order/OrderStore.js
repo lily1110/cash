@@ -1,4 +1,4 @@
-var Utils = require('../public/Utils');
+var Utils = require('../public/Util');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
@@ -16,13 +16,8 @@ var OrdersStore = assign({}, EventEmitter.prototype, {
     getHomeData:function() {
         return homeData;
     },
-    queryHome:function() {
-        Utils.getData("../../api/home.json",{},function(data){
-            homeData = data;
-            OrdersStore.emitChange();
-        },function(v1,v2,v3){})
-    },
     
+
 });
 
 module.exports = OrdersStore;

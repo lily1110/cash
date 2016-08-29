@@ -10,8 +10,8 @@ var MyChart = require("./public/MyChart.react");
 window.React = React;
 
 var routes = (
-    <Route path="/" component={MyChart}>
-        <IndexRoute component={MyChart} />
+    <Route path="/" component={Cash}>
+        <IndexRoute component={Cash} />
         <Route path="user" component={MyChart} />
     </Route>
 );
