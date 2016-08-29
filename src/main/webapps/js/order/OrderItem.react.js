@@ -1,6 +1,7 @@
 var React = require("react");
 var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
+var Util = require("../public/Util");
 
 var OrderItem = React.createClass({
     data:{
@@ -15,8 +16,8 @@ var OrderItem = React.createClass({
         amountAcutal:"",
     },
     render:function() {
-        var data = isNullOrEmpty(this.props.data) ? this.data : this.props.data;
-        var css = isNullOrEmpty(this.props.css) ? "" :this.props.css;
+        var data = Util.isNullOrEmpty(this.props.obj) ? this.data : this.props.obj;
+        var css = Util.isNullOrEmpty(this.props.css) ? "" :this.props.css;
         
         return(
             <div>

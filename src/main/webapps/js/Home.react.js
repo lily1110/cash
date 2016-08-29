@@ -3,6 +3,7 @@ var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
 var Header = require("./public/Header.react");
 var StaticItem = require("./public/StaticItem.react");
+var MenuItem = require("./public/MenuItem.react");
 var Util = require("./public/Util");
 var OrderStore = require("./order/OrderStore");
 
@@ -58,7 +59,15 @@ var Home = React.createClass({
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4"  obj={{"title":"未结金额","data":homeData.notFinishedReceivable}}/>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"未结／已结", "data":homeData.notFinishedOrderQty+"/"+(homeData.orderQty-homeData.notFinishedOrderQty)}}/>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"就餐人数", "data":homeData.pplNum}}/>
-                </div>    
+                </div> 
+                <div className="row">
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"客流量", "data":homeData.pplNum}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/abstatic" obj={{"title":"异常监控", "data":homeData.abOrderQty}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/paymentForm" obj={{"title":"收款构成", "data":homeData.cashType+"现金"}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"营业日报", "data":homeData.receivable}}/>
+                    
+                </div>   
+                   
             </div>    
             </div>
         );

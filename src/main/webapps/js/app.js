@@ -7,12 +7,21 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var Cash = require("./Cash.react");
 var MyChart = require("./public/MyChart.react");
+var AbStatics =require("./AbStatics.react");
+var Orders =require("./Orders.react");
+var PaymentForm = require("./PaymentForm.react");
 window.React = React;
 
 var routes = (
-    <Route path="/" component={Cash}>
-        <IndexRoute component={Cash} />
-        <Route path="user" component={MyChart} />
+    <Route>
+
+        <Route path="/" component={Cash}>
+            <IndexRoute component={Cash} />
+            <Route path="user" component={MyChart} />
+        </Route>
+        <Route path="abstatic" component={AbStatics}  />
+        <Route path="paymentForm" component={PaymentForm}  />
+        <Route path="order/:tag" component={Orders}  />
     </Route>
 );
 

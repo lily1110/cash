@@ -1,6 +1,7 @@
 var React = require("react");
 var ReactRouter = require("react-router");
 var Link = ReactRouter.Link;
+var Util = require("./Util");
 
 var Btn = React.createClass({
     click: function(event) {
@@ -10,8 +11,8 @@ var Btn = React.createClass({
         }
     },
     render:function() {
-        var data = isNullOrEmpty(this.props.data) ? "" : this.props.data;
-        var css = isNullOrEmpty(this.props.css) ? "" :this.props.css;
+        var data = Util.isNullOrEmpty(this.props.data) ? "" : this.props.data;
+        var css = Util.isNullOrEmpty(this.props.css) ? "" :this.props.css;
         
         return(
             <a className={css} onClick={this.click}>
