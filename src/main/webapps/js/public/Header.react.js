@@ -6,7 +6,7 @@ var Header = React.createClass({
     
     render:function() {
         var left = this.props.left?this.props.left:(<div />);
-        var title = this.props.title?this.props.title:(<p>屏芯智能餐厅</p>);
+        var title = this.props.title?this.props.title:(<h4>屏芯智能餐厅</h4>);
         var right = this.props.right?this.props.right:(<div />);
         
         return(
@@ -14,7 +14,7 @@ var Header = React.createClass({
                 <div>
                 {left}
                 </div>
-                <div>
+                <div className="center">
                 {
                     title
                 }

@@ -20,68 +20,15 @@ var TimeTab = React.createClass({
     },
     clickDay: function(event) {
         this.clickTab("day");
-
-        // var obj = this.props.obj;
-        // var d = this.getCurrent();
-        // var current = this.getCurrent();
-        // var start = Util.formatDate(d,this.fmt);
-        // d.setDate(d.getDate()+1);
-        // var end = d;
-        // var tag="day";
-        // if($.isFunction(this.props.click) ) {
-        //     var s = start;
-        //     var e = Util.formatDate(end,this.fmt);
-        //     this.props.click(tag,s,e);
-        //     this.setState({tag:tag, current:current,currentDesc:s});
-        // }
     },
     clickWeek: function(event) {
         this.clickTab("week");
-
-        // var obj = this.props.obj;
-        // var d = this.getCurrent();
-        // d.setDate(d.getDate()-d.getDay()+1);
-        // var current =  this.getCurrent();
-        // current.setDate(d.getDate()-d.getDay()+1);
-        // var start = Util.formatDate(d,this.fmt);
-        // d.setDate(d.getDate()+7);
-        // var end = d;
-        // var tag="week";
-
-        // if($.isFunction(this.props.click)) {
-        //     var s = start;
-        //     var e = Util.formatDate(end,this.fmt);
-        //     this.props.click(tag,s,e);
-        //     this.setState({tag:tag,current:current, currentDesc:s+"~"+e});
-        // }
-
     },
     clickMonth: function(event) {
         this.clickTab("month");
-
-        // var tag = "month";
-        // var d = new Date(this.getCurrent());
-        // var current = Util.getDateStart(d,tag, "");
-        // var currentDesc = Util.getDateStart(d,tag, "MM");
-        // if($.isFunction(this.props.click) ) {
-        //     var s = Util.getDateStart(d,tag, this.fmt);
-        //     var e = Util.getDateEnd(d,tag, this.fmt);
-        //     this.props.click(tag,s,e);
-        //     this.setState({tag:tag, current:current,currentDesc:currentDesc});
-        // }
     },
     clickYear: function(event) {
         this.clickTab("year");
-        // var obj = this.props.obj;
-        // var d = new Date(this.getCurrent());
-        
-        // var current = Util.getDateStart(d,"year", "");
-        // if($.isFunction(this.props.click) ) {
-        //     var s = start;
-        //     var e = Util.formatDate(end,this.fmt);
-        //     this.props.click(tag,s,e);
-        //     this.setState({tag:tag, current:current, currentDesc:Util.formatDate(new Date(this.getCurrent()),"yyyy")});
-        // }
     },
     clickTab: function(tag,current) {
         var d = new Date(this.getCurrent());

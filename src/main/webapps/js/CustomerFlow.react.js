@@ -28,42 +28,76 @@ var CustomerFlow = React.createClass({
          var params = {
             start:"2016-05-29",
             end:"2016-05-30",
+            tag:"day",
         };
         this.queryList(params);
     },
     componentWillUnmount:function() {
     },
    
-    querySuccess: function(data) {
+    querySuccess: function(data,params) {
         var self = this;
         var list = data;
         list = _.sortBy(list, "hour");
         var pplNum = 0;
+        var tag = params.tag;
+
         _.each(list, function(t){
             pplNum += parseInt(t.pplNum);
+            var d = new Date(t.date);
+            var week = Util.formatDate(d,"EE");
+            var month = Util.formatDate(d,"MM");
+            var day = Util.formatDate(d,"dd");
+            var hour = t.hour;
+            t["hourDesc"] = parseInt(hour)+":00";
+            t["week"] = week;
+            t["month"] = parseInt(month)+"";
+            t["day"] = parseInt(day)+"";
         });
-        var groups = _.groupBy(list, "hour");
+
+        var groups ={};
+        var labels = [];
+
         var datas=[];
         var data=[];
-        _.each(self.dailyLabels,function(t){
-            var h = t.substring(0,t.indexOf(":"));
+
+        switch(tag) {
+            case "day":
+                labels = labels.concat(self.dailyLabels);
+                groups = _.groupBy(list, "hourDesc");
+                break;
+            case "week":
+                labels = labels.concat(self.weeklyLabels);
+                groups = _.groupBy(list, "week");
+
+                
+                break;
+            case "month":
+                labels = labels.concat(self.monthlyLabels);
+                groups = _.groupBy(list, "day");
+
+                break;
+            case "year":
+                labels = labels.concat(self.yearlyLabels);
+                groups = _.groupBy(list, "month");
+                break;
+
+        }
+
+
+        _.each(labels,function(l){
             var d = 0;
-
-            if(Util.isNullOrEmpty(groups[h]) ) {
-                d=0;
-            }
-            else {
-                var g = groups[h];
-
+            if(!Util.isNullOrEmpty(groups[l]) ) {
+                var g = groups[l];
                 _.each(g,function(t) {
                     d+= parseInt(t.pplNum)
                 });
-            }
+            } 
             data.push(d);
         });
         datas.push(data);
 
-        this.setState({"pplNum":pplNum,"labels":self.dailyLabels,"titles":self.titles,"datas":datas});
+        this.setState({"pplNum":pplNum,"labels":labels,"titles":self.titles,"datas":datas});
     }, 
     filter: function(list,params) {
         list = _.filter(list, function(t){
@@ -75,7 +109,7 @@ var CustomerFlow = React.createClass({
         var self = this;
         Util.getData("api/main.json",{},function(data){
             data = self.filter(data,params)
-            self.querySuccess(data);
+            self.querySuccess(data,params);
         },function(v1,v2,v3){
             console.log(v1.status)
         });
@@ -92,7 +126,7 @@ var CustomerFlow = React.createClass({
         var params = {
             start:start,
             end: end,
-            
+            tag:tag,
         };
         this.queryList(params);
     },
@@ -101,7 +135,10 @@ var CustomerFlow = React.createClass({
         return(
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
-                     <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
+                    <div className="row"> 
+                        <Header title="客流量" />
+                    </div>
+                    <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
                     <div className="row"> 
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日最高值","data":this.state.max+"/人"}} />
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日平均值","data":this.state.avg+"/人"}} />

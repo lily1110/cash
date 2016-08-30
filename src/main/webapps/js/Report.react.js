@@ -21,14 +21,16 @@ function getStateFromStores() {
         pplNum:0,
         orderAvg:0,
         pplAvg:0,
+        titles:["实付","应付"],
+        dailyLabels:["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00","1:00","2:00","3:00"],
+        weeklyLabels:["周一","周二","周三","周四","周五","周六","周日"],
+        monthlyLabels:["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
+        yearlyLabels:["1","2","3","4","5","6","7","8","9","10","11","12"],
     };
 }
+
 var Report = React.createClass({
-    titles:["实付","应付"],
-    dailyLabels:["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00","1:00","2:00","3:00"],
-    weeklyLabels:["周一","周二","周三","周四","周五","周六","周日"],
-    monthlyLabels:["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
-    yearlyLabels:["1","2","3","4","5","6","7","8","9","10","11","12"],
+    
     getInitialState: function() {
         return getStateFromStores();
     },
@@ -69,12 +71,12 @@ var Report = React.createClass({
             var week = Util.formatDate(d,"EE");
             var month = Util.formatDate(d,"MM");
             var day = Util.formatDate(d,"dd");
-            var hour = Util.formatDate(d,"hh");
+            var hour = t.hour;
 
-            t["hour"] = hour;
+            t["hourDesc"] = parseInt(hour)+":00";
             t["week"] = week;
-            t["month"] = month;
-            t["day"] = day;
+            t["month"] = parseInt(month)+"";
+            t["day"] = parseInt(day)+"";
         });
         var orderAvg = actual/orderQty;
         var pplAvg = actual/pplNum;
@@ -86,24 +88,24 @@ var Report = React.createClass({
 
         switch(tag) {
             case "day":
-                labels = self.dailyLabels;
-                groups = _.groupBy(list, "hour");
+                labels = labels.concat(this.state.dailyLabels);
+                groups = _.groupBy(list, "hourDesc");
                 break;
             case "week":
+                labels = labels.concat(this.state.weeklyLabels);
                 groups = _.groupBy(list, "week");
-                labels = self.weeklyLabels;
-
-                
                 break;
             case "month":
+                labels = labels.concat(this.state.monthlyLabels);
                 groups = _.groupBy(list, "day");
-                labels = self.monthlyLabels;
 
                 break;
             case "year":
+                labels = labels.concat(this.state.yearlyLabels);
                 groups = _.groupBy(list, "month");
-                labels = self.yearlyLabels;
                 break;
+            default:
+                labels=[];
 
         }
         _.each(labels,function(l){
@@ -120,26 +122,10 @@ var Report = React.createClass({
                     receivableData.push(receivable);
                     actualData.push(actual);
                 });
-        // _.each(labels,function(t){
-        //             var h = t.substring(0,t.indexOf(":"));
-        //             var receivable = 0;
-        //             var actual = 0;
-
-        //             if(!Util.isNullOrEmpty(groups[h]) ) {
-        //                 var g = groups[h];
-        //                 _.each(g,function(t) {
-        //                     receivable+= parseInt(t.amount)
-        //                     actual+= parseInt(t.amountActual)
-        //                 });
-        //             }
-        //             receivableData.push(receivable);
-        //             actualData.push(actual);
-        //         });
         datas.push(actualData);
         datas.push(receivableData);
         this.setState({
-            "labels":self.dailyLabels,
-            "titles":self.titles,
+            "labels":labels,
             "datas":datas,
             "pplNum":pplNum,
             "receivable":receivable,
@@ -148,7 +134,6 @@ var Report = React.createClass({
             "reback":reback,
             "orderAvg":parseInt(orderAvg),
             "pplAvg":parseInt(pplAvg),
-
         });
     }, 
     queryList:function(params) {
@@ -190,7 +175,7 @@ var Report = React.createClass({
                     </div>
                     <div className="row"> 
                         <LineChart css="col-md-12 col-xs-12 col-sm-12" title="营业日报"
-                            titles={this.titles}
+                            titles={this.state.titles}
                             labels={this.state.labels} 
                             datas={this.state.datas}
                              />
