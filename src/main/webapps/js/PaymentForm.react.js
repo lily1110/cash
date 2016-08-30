@@ -5,6 +5,7 @@ var Util = require("./public/Util");
 var MenuItem = require("./public/MenuItem.react");
 var Header = require("./public/Header.react");
 var _ = require("underscore");
+var TimeTab = require("./public/TimeTab.react");
 
 function getStateFromStores() {
     return {
@@ -18,18 +19,22 @@ var PaymentForm = React.createClass({
         return getStateFromStores();
     },
     componentDidMount: function() {
-        this.queryList();
+        var params = {
+            start:"2016-05-29",
+            end:"2016-05-30",
+        };
+        this.queryList(params);
     },
     componentWillUnmount:function() {
     },
-    filter:function(list){
+    filter:function(list,params){
         list =  _.filter(list, function(t){
-            return t.date == "2016-05-29"
+            return t.date >= params.start && t.date< params.end
         });
         return list;
     },
-    querySuccess: function(data) {
-        var filterList = this.filter(data);
+    querySuccess: function(data,params) {
+        var filterList = this.filter(data,params);
         var orderList = _.filter(filterList, function(t){
             return t.isPaid=="1"
         });
@@ -55,15 +60,21 @@ var PaymentForm = React.createClass({
         this.setState({"list":hashMap,"receivable":receivable,"actual":actual});
     }, 
 
-    queryList:function() {
+    queryList:function(params) {
         var self = this;
         Util.getData("api/main.json",{},function(data){
-            self.querySuccess(data);
+            self.querySuccess(data,params);
         },function(v1,v2,v3){
             console.log(v1.status)
         });
     },
-
+    clickTab: function(tag, start,end){
+        var params = {
+            start:start,
+            end: end,
+        };
+        this.queryList(params);
+    },
 
     render:function() {
         var staticHtml = [];
@@ -84,6 +95,8 @@ var PaymentForm = React.createClass({
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
                     <Header title="收款构成" />
+                    <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
+
                     <BarChart title="收款构成" data={this.state.list} />
                     <div className="row"> 
                         <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":this.state.receivable}} />

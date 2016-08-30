@@ -5,6 +5,7 @@ var Util = require("./public/Util");
 var StaticItem = require("./public/StaticItem.react");
 var Header = require("./public/Header.react");
 var _ = require("underscore");
+var TimeTab = require("./public/TimeTab.react");
 
 function getStateFromStores() {
     return {
@@ -24,19 +25,18 @@ var CustomerFlow = React.createClass({
         return getStateFromStores();
     },
     componentDidMount: function() {
-        this.queryList();
+         var params = {
+            start:"2016-05-29",
+            end:"2016-05-30",
+        };
+        this.queryList(params);
     },
     componentWillUnmount:function() {
     },
-    filter: function(list) {
-        list = _.filter(list, function(t){
-            return t.date == "2016-05-29"
-        });
-        return list;
-    },
+   
     querySuccess: function(data) {
         var self = this;
-        var list = self.filter(data);
+        var list = data;
         list = _.sortBy(list, "hour");
         var pplNum = 0;
         _.each(list, function(t){
@@ -65,10 +65,16 @@ var CustomerFlow = React.createClass({
 
         this.setState({"pplNum":pplNum,"labels":self.dailyLabels,"titles":self.titles,"datas":datas});
     }, 
-
-    queryList:function() {
+    filter: function(list,params) {
+        list = _.filter(list, function(t){
+            return t.date >= params.start && t.date< params.end;
+        });
+        return list;
+    },
+    queryList:function(params) {
         var self = this;
         Util.getData("api/main.json",{},function(data){
+            data = self.filter(data,params)
             self.querySuccess(data);
         },function(v1,v2,v3){
             console.log(v1.status)
@@ -82,13 +88,20 @@ var CustomerFlow = React.createClass({
         });
           
     },
-
+    clickTab: function(tag, start,end){
+        var params = {
+            start:start,
+            end: end,
+            
+        };
+        this.queryList(params);
+    },
 
     render:function() {
         return(
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
-                    <Header title="客流量" />
+                     <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
                     <div className="row"> 
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日最高值","data":this.state.max+"/人"}} />
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日平均值","data":this.state.avg+"/人"}} />

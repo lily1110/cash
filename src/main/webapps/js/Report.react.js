@@ -5,6 +5,7 @@ var Util = require("./public/Util");
 var StaticItem = require("./public/StaticItem.react");
 var Header = require("./public/Header.react");
 var _ = require("underscore");
+var TimeTab = require("./public/TimeTab.react");
 
 function getStateFromStores() {
     return {
@@ -32,27 +33,31 @@ var Report = React.createClass({
         return getStateFromStores();
     },
     componentDidMount: function() {
-        this.queryList();
+        var params = {
+            start:"2016-05-29",
+            end:"2016-05-30",
+            tag:"day",
+        };
+        this.queryList(params);
     },
     componentWillUnmount:function() {
     },
-    filter: function(list) {
+    filter: function(list,params) {
         list = _.filter(list, function(t){
-            return t.date == "2016-05-29"&&t.isPaid=="1"
+            return t.date>=params.start&&t.date<params.end&&t.isPaid=="1";
         });
         return list;
     },
-    querySuccess: function(data) {
+    querySuccess: function(data,params) {
         var self = this;
-        var list = self.filter(data);
-        list = _.sortBy(list, "hour");
+        var list = _.sortBy(data, "hour");
         var pplNum = 0;
         var receivable = 0;
         var actual = 0;
         var reback = 0;
         var orderQty = 0;
         var discount = 0;
-
+        var tag = params.tag;
         _.each(list, function(t){
             pplNum += parseInt(t.pplNum);
             actual += parseInt(t.amountActual);
@@ -60,28 +65,76 @@ var Report = React.createClass({
             orderQty += parseInt(t.orderQty);
             discount += parseInt(t.discount);
             reback += parseInt(t.numberBack);
+            var d = new Date(t.date);
+            var week = Util.formatDate(d,"EE");
+            var month = Util.formatDate(d,"MM");
+            var day = Util.formatDate(d,"dd");
+            var hour = Util.formatDate(d,"hh");
+
+            t["hour"] = hour;
+            t["week"] = week;
+            t["month"] = month;
+            t["day"] = day;
         });
         var orderAvg = actual/orderQty;
         var pplAvg = actual/pplNum;
-        var groups = _.groupBy(list, "hour");
         var datas=[];
         var receivableData=[];
         var actualData=[];
-        _.each(self.dailyLabels,function(t){
-            var h = t.substring(0,t.indexOf(":"));
-            var receivable = 0;
-            var actual = 0;
+        var groups ={};
+        var labels = [];
 
-            if(!Util.isNullOrEmpty(groups[h]) ) {
-                var g = groups[h];
-                _.each(g,function(t) {
-                    receivable+= parseInt(t.amount)
-                    actual+= parseInt(t.amountActual)
+        switch(tag) {
+            case "day":
+                labels = self.dailyLabels;
+                groups = _.groupBy(list, "hour");
+                break;
+            case "week":
+                groups = _.groupBy(list, "week");
+                labels = self.weeklyLabels;
+
+                
+                break;
+            case "month":
+                groups = _.groupBy(list, "day");
+                labels = self.monthlyLabels;
+
+                break;
+            case "year":
+                groups = _.groupBy(list, "month");
+                labels = self.yearlyLabels;
+                break;
+
+        }
+        _.each(labels,function(l){
+                    var receivable = 0;
+                    var actual = 0;
+
+                    if(!Util.isNullOrEmpty(groups[l]) ) {
+                        var g = groups[l];
+                        _.each(g,function(t) {
+                            receivable+= parseInt(t.amount)
+                            actual+= parseInt(t.amountActual)
+                        });
+                    }
+                    receivableData.push(receivable);
+                    actualData.push(actual);
                 });
-            }
-            receivableData.push(receivable);
-            actualData.push(actual);
-        });
+        // _.each(labels,function(t){
+        //             var h = t.substring(0,t.indexOf(":"));
+        //             var receivable = 0;
+        //             var actual = 0;
+
+        //             if(!Util.isNullOrEmpty(groups[h]) ) {
+        //                 var g = groups[h];
+        //                 _.each(g,function(t) {
+        //                     receivable+= parseInt(t.amount)
+        //                     actual+= parseInt(t.amountActual)
+        //                 });
+        //             }
+        //             receivableData.push(receivable);
+        //             actualData.push(actual);
+        //         });
         datas.push(actualData);
         datas.push(receivableData);
         this.setState({
@@ -98,11 +151,11 @@ var Report = React.createClass({
 
         });
     }, 
-
-    queryList:function() {
+    queryList:function(params) {
         var self = this;
         Util.getData("api/main.json",{},function(data){
-            self.querySuccess(data);
+            data = self.filter(data, params);
+            self.querySuccess(data, params);
         },function(v1,v2,v3){
             console.log(v1.status)
         });
@@ -115,13 +168,22 @@ var Report = React.createClass({
         });
           
     },
-
+    clickTab: function(tag, start,end){
+        var params = {
+            start:start,
+            end: end,
+            tag:tag,
+        };
+        this.queryList(params);
+    },
 
     render:function() {
         return(
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
                     <Header title="营业日报" />
+                     <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
+
                     <div className="row"> 
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"日最高值","data":"¥"+this.state.max}} />
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"日平均值","data":"¥"+this.state.avg}} />

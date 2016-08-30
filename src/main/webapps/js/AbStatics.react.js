@@ -4,6 +4,7 @@ var BarChart = require("./public/BarChart.react");
 var Util = require("./public/Util");
 var MenuItem = require("./public/MenuItem.react");
 var Header = require("./public/Header.react");
+var TimeTab = require("./public/TimeTab.react");
 var _ = require("underscore");
 
 function getStateFromStores() {
@@ -18,16 +19,27 @@ var AbStatics = React.createClass({
         return getStateFromStores();
     },
     componentDidMount: function() {
-        this.queryAbs();
+        var params = {
+            start:"2016-05-29",
+            end:"2016-05-30",
+        };
+        this.queryAbs(params);
     },
     componentWillUnmount:function() {
     },
-    querySuccess: function(data) {
-        var orderList = _.filter(data, function(t){
-            return t.date == "2016-05-29"&&t.isPaid=="1"
+    filter: function(list,params) {
+        list = _.filter(list, function(t) {
+            return t.date >=params.start && t.date< params.end;
+        })
+        return list;
+    },
+    querySuccess: function(data,params) {
+        var list = this.filter(data,params);
+        var orderList = _.filter(list, function(t){
+            return t.isPaid=="1"
         });
-        var absList = _.filter(data, function(t){
-            return t.date == "2016-05-29"&&!Util.isNullOrEmpty(t.discountType)
+        var absList = _.filter(list, function(t){
+            return !Util.isNullOrEmpty(t.discountType)
         });
 
         var receivable = 0;
@@ -48,16 +60,22 @@ var AbStatics = React.createClass({
         this.setState({"abs":hashMap,"receivable":receivable,"actual":actual});
     }, 
 
-    queryAbs:function() {
+    queryAbs:function(params) {
         var self = this;
         Util.getData("api/main.json",{},function(data){
-            self.querySuccess(data);
+            self.querySuccess(data,params);
         },function(v1,v2,v3){
             console.log(v1.status)
         });
     },
 
-
+    clickTab: function(tag, start,end){
+        var params = {
+            start:start,
+            end: end,
+        };
+        this.queryAbs(params);
+    },
     render:function() {
         var staticHtml = [];
         _.map(this.state.abs, function(v,k) {
@@ -69,6 +87,7 @@ var AbStatics = React.createClass({
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
                     <Header title="异常监控" />
+                    <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
                     <BarChart title="异常监控" data={this.state.abs} />
                     <div className="row"> 
                         <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":this.state.receivable}} />
