@@ -22,12 +22,19 @@ var PaymentForm = React.createClass({
     },
     componentWillUnmount:function() {
     },
-    querySuccess: function(data) {
-        var orderList = _.filter(data, function(t){
-            return t.date == "2016-05-29"&&t.isPaid=="1"
+    filter:function(list){
+        list =  _.filter(list, function(t){
+            return t.date == "2016-05-29"
         });
-        var list = _.filter(data, function(t){
-            return t.date == "2016-05-29"&&!Util.isNullOrEmpty(t.paymentType)
+        return list;
+    },
+    querySuccess: function(data) {
+        var filterList = this.filter(data);
+        var orderList = _.filter(filterList, function(t){
+            return t.isPaid=="1"
+        });
+        var list = _.filter(filterList, function(t){
+            return !Util.isNullOrEmpty(t.paymentType)
         });
 
         var receivable = 0;

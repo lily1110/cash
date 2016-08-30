@@ -10,6 +10,8 @@ var MyChart = require("./public/MyChart.react");
 var AbStatics =require("./AbStatics.react");
 var Orders =require("./Orders.react");
 var PaymentForm = require("./PaymentForm.react");
+var CustomerFlow = require("./CustomerFlow.react");
+var Report = require("./Report.react");
 window.React = React;
 
 var routes = (
@@ -21,6 +23,8 @@ var routes = (
         </Route>
         <Route path="abstatic" component={AbStatics}  />
         <Route path="paymentForm" component={PaymentForm}  />
+        <Route path="customerFlow" component={CustomerFlow}  />
+        <Route path="report" component={Report}  />
         <Route path="order/:tag" component={Orders}  />
     </Route>
 );

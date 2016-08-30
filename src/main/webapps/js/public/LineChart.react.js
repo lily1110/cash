@@ -10,11 +10,20 @@ var LineChart = React.createClass({
     datasets:[],
     chartOptions :{
         bezierCurve:false,
+        responsive: true,
+         title: {
+            display: true,
+            text: 'Custom Chart Title'
+        },
         scales: {
             yAxes: [{
+                stacked: true,
                 ticks: {
-                    beginAtZero:true
+                    beginAtZero:true,
                 }
+            }],
+            xAxes: [{
+                stacked: true
             }]
         },
     //String - A legend template
@@ -69,9 +78,13 @@ var LineChart = React.createClass({
         var labels = self.props.labels;
         self.getHandleSets(titles,datas);
         var chartData =  {
-            labels: self.labels,
+            labels: labels,
             datasets: self.datasets
         };
+        if(!$.isArray(datas)||datas.length<1||!$.isArray(labels)||labels.length<1) {
+            return <div/>
+        }
+
         return (
             <div css={css}>
                 <Line data={chartData} options={this.chartOptions}/>

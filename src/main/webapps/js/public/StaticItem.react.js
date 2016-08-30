@@ -15,13 +15,11 @@ var StaticItem = React.createClass({
         
         return(
             <div className={css}>
-            <Link to={link}>
                 <p className="title">{obj.title}</p>
                 <h1 className="data">{obj.data}</h1>
                 {
                     showTag?<i></i>:""
                 }
-             </Link>
              </div>
         );
 

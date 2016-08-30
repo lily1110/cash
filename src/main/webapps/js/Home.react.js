@@ -61,10 +61,10 @@ var Home = React.createClass({
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"就餐人数", "data":homeData.pplNum}}/>
                 </div> 
                 <div className="row">
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"客流量", "data":homeData.pplNum}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/customerFlow" obj={{"title":"客流量", "data":homeData.pplNum}}/>
                     <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/abstatic" obj={{"title":"异常监控", "data":homeData.abOrderQty}}/>
                     <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/paymentForm" obj={{"title":"收款构成", "data":homeData.cashType+"现金"}}/>
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"营业日报", "data":homeData.receivable}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/report" obj={{"title":"营业日报", "data":homeData.receivable}}/>
                     
                 </div>   
                    

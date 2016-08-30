@@ -2,18 +2,19 @@ var React = require("react");
 var ReactRouter = require("react-router");
 var LineChart = require("./public/LineChart.react");
 var Util = require("./public/Util");
-var MenuItem = require("./public/MenuItem.react");
+var StaticItem = require("./public/StaticItem.react");
 var Header = require("./public/Header.react");
 var _ = require("underscore");
 
 function getStateFromStores() {
     return {
         tag: "daily",
-        receivable:0,
-        actual:0,
+        max:0,
+        avg:0,
+        pplNum:0,
     };
 }
-var AbStatics = React.createClass({
+var CustomerFlow = React.createClass({
     titles:["客流量"],
     dailyLabels:["4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00","1:00","2:00","3:00"],
     weeklyLabels:["周一","周二","周三","周四","周五","周六","周日"],
@@ -27,23 +28,42 @@ var AbStatics = React.createClass({
     },
     componentWillUnmount:function() {
     },
-    querySuccess: function(data) {
-        var self = this;
-        var list = _.filter(data, function(t){
+    filter: function(list) {
+        list = _.filter(list, function(t){
             return t.date == "2016-05-29"
         });
+        return list;
+    },
+    querySuccess: function(data) {
+        var self = this;
+        var list = self.filter(data);
         list = _.sortBy(list, "hour");
         var pplNum = 0;
         _.each(list, function(t){
             pplNum += parseInt(t.pplNum);
         });
         var groups = _.groupBy(list, "hour");
+        var datas=[];
+        var data=[];
+        _.each(self.dailyLabels,function(t){
+            var h = t.substring(0,t.indexOf(":"));
+            var d = 0;
 
-        for (var i=0;i<12;i++) {
-            var h = i+1;
+            if(Util.isNullOrEmpty(groups[h]) ) {
+                d=0;
+            }
+            else {
+                var g = groups[h];
 
-        }
-        this.setState({"titles":self.titles,"receivable":receivable,"actual":actual});
+                _.each(g,function(t) {
+                    d+= parseInt(t.pplNum)
+                });
+            }
+            data.push(d);
+        });
+        datas.push(data);
+
+        this.setState({"pplNum":pplNum,"labels":self.dailyLabels,"titles":self.titles,"datas":datas});
     }, 
 
     queryList:function() {
@@ -53,8 +73,8 @@ var AbStatics = React.createClass({
         },function(v1,v2,v3){
             console.log(v1.status)
         });
-        Util.getData("api/dailyStatic.json",{},function(data){
-            var max = data.max;
+        Util.getData("api/customerStatic.json",{},function(data){
+            var max = parseInt(data.max);
             var avg = parseInt(data.avg);
             self.setState({"max":max,"avg":avg});
         },function(v1,v2,v3){
@@ -65,30 +85,26 @@ var AbStatics = React.createClass({
 
 
     render:function() {
-        var staticHtml = [];
-        _.map(this.state.abs, function(v,k) {
-            var t = (
-                <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":k,"data":v}} link={"/order/"+k}/>)
-            staticHtml.push(t);
-        });
         return(
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
                     <Header title="客流量" />
                     <div className="row"> 
-                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":this.state.receivable}} />
-                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":this.state.actual}} />
+                        <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日最高值","data":this.state.max+"/人"}} />
+                        <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日平均值","data":this.state.avg+"/人"}} />
+                        <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"就餐人数","data":this.state.pplNum+"/人"}} />
                     </div>
                     <div className="row"> 
-                        {staticHtml}
+                        <LineChart css="col-md-12 col-xs-12 col-sm-12" title="客流量"
+                            titles={this.titles}
+                            labels={this.state.labels} 
+                            datas={this.state.datas}
+                             />
                     </div>
-
-                    <LineChart title="异常监控" data={this.state.abs} />
-
                 </div>
             </div>
         );
     },
 });
 
-module.exports = AbStatics;
+module.exports = CustomerFlow;
