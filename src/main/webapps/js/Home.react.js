@@ -55,16 +55,16 @@ var Home = React.createClass({
                     <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"今日应收（元）", "data":parseFloat(homeData.receivable).toFixed(2)}}/>
                     <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"今日实收（元）", "data":parseFloat(homeData.actual).toFixed(2)}}/>
                 </div>   
-                <div className="row">
+                <div className="row static-row-1" style={{backgroundColor: '#21232A'}}>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4"  obj={{"title":"未结金额","data":parseFloat(homeData.notFinishedReceivable).toFixed(2)}}/>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"未结／已结", "data":homeData.notFinishedOrderQty+"/"+(homeData.orderQty-homeData.notFinishedOrderQty)}}/>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"就餐人数", "data":homeData.pplNum}}/>
                 </div> 
                 <div className="row">
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/customerFlow" obj={{"title":"客流量", "data":homeData.pplNum}}/>
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/abstatic" obj={{"title":"异常监控", "data":homeData.abOrderQty}}/>
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/paymentForm" obj={{"title":"收款构成", "data":homeData.cashType+"现金"}}/>
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6" link="/report" obj={{"title":"营业日报", "data":homeData.receivable}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6 customer" link="/customerFlow" obj={{"title":"客流量", "data":homeData.pplNum,"icon":(<i className="fa fa-users" ariaHidden="true"></i>)}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6 abnormal" link="/abstatic" obj={{"title":"异常监控", "data":homeData.abOrderQty,"icon":(<i className="fa fa-exclamation-triangle" ariaHidden="true"></i>)}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6 payment" link="/paymentForm" obj={{"title":"收款构成", "data":homeData.cashType+"现金","icon":(<i className="fa fa-pie-chart" ariaHidden="true"></i>)}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6 report" link="/report" obj={{"title":"营业日报", "data":homeData.receivable,"icon":(<i className="fa fa-line-chart" ariaHidden="true"></i>)}}/>
                     
                 </div>   
                    

@@ -8,7 +8,7 @@ header div {
     display: inline-block;
     width: 33.33%;
     color: #21232a;
-    line-height: 2;
+    line-height: 3;
     font-size: 15px;
     font-weight: bold;
 }
@@ -23,12 +23,76 @@ a a:focus, a:hover {
     border-bottom: #272930 1px solid;
     border-right: #272930 1px solid;
     color:#3CC2DB;
-    padding-top: 10px;
+    padding: 10px 0;
     text-align: center;
+    height: 90px;
+}
+.staticItem .title {
+    font-size: 14px;
+    color: #494c4f;
+    height: 25px;
+}
+.staticItem .data {
+    font-size: 30px;
+    font-weight: bold;
+    height: 50px;
+}
+.static-row-1 {
+    background-color: #21232A;
+
+}
+.static-row-1 .staticItem {
+    margin-top: 10px;
+    padding-top: 0;
+    margin-bottom: 10px;
+    border-bottom: none;
+    height: 70px;
+
+}
+
+.static-row-1 .staticItem .data {
+    height: 40px;
 }
 div .staticItem :last-child {
     border-right: none;
 }
+.menu-item {
+    text-align: center;
+    background: white;
+    padding-top: 5px;
+    padding-bottom: 10px;
+
+
+}
+.menu-item div {
+    padding-top: 5px;
+    color: #A7A5A6;
+}
+.menu-item .data {
+    font-size: 25px;
+    font-weight: bold;
+}
+.menu-item .title {
+    font-size: 14px;
+}
+.customer.menu-item .icon {
+    color: #5f7ebb;
+}
+.abnormal.menu-item .icon {
+    color: #e42f33;
+}
+.abnormal.menu-item .data {
+    color: #e42f33;
+}
+
+.payment.menu-item .icon {
+    color: #ee4a7d;
+}
+.report.menu-item .icon {
+    color: #15aea4;
+}
+
+
 .time-btns ul {
 	list-style:none;
 	padding: 10px 0;

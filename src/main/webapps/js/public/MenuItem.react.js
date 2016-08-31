@@ -21,35 +21,39 @@ var Btn = React.createClass({
         var obj= _.isNull(this.props.obj)?this.default:this.props.obj;
         var link =  Util.isNullOrEmpty(this.props.link) ? "" :this.props.link;
         return(
-            <div className = {css}>
+            <div className = {css+" menu-item"}>
             {
                 link==""?(
                     <div>
-                        <div>
-                            <img src={obj.icon} />
+                        <div className="icon">
+                            {
+                                obj.icon?obj.icon:""
+                            }
                         </div>
-                        <p>
+                        <div className="title">
                             {obj.title}
-                        </p>
-                        <h1 className="data">
+                        </div>
+                        <div className="data">
                             {
                                 obj.data
                             }
-                        </h1>
+                        </div>
                     </div>
             ):(
              <Link to={link}>
-                    <div>
-                        <img src={obj.icon} />
-                    </div>
-                    <p>
+                    <div className="icon">
+                            {
+                                obj.icon?obj.icon:""
+                            }
+                        </div>
+                    <div className="title">
                         {obj.title}
-                    </p>
-                    <h1 className="data">
+                    </div>
+                    <div className="data">
                         {
                             obj.data
                         }
-                    </h1>
+                    </div>
 
             </Link>
             )
