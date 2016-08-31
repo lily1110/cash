@@ -18,16 +18,24 @@ var TimeTab = React.createClass({
         data.tag = "day";
         return data;
     },
-    clickDay: function(event) {
+    clickDay: function(obj,event) {
+        $(".time-btns ul a").removeClass("selected");
+        $(event.target).addClass("selected");
         this.clickTab("day");
     },
-    clickWeek: function(event) {
+    clickWeek: function(obj,event) {
+        $(".time-btns ul a").removeClass("selected");
+        $(event.target).addClass("selected");
         this.clickTab("week");
     },
-    clickMonth: function(event) {
+    clickMonth: function(obj,event) {
+        $(".time-btns ul a").removeClass("selected");
+        $(event.target).addClass("selected");
         this.clickTab("month");
     },
-    clickYear: function(event) {
+    clickYear: function(obj,event) {
+        $(".time-btns ul a").removeClass("selected");
+        $(event.target).addClass("selected");
         this.clickTab("year");
     },
     clickTab: function(tag,current) {
@@ -90,10 +98,10 @@ var TimeTab = React.createClass({
         var current = this.state.current;
         var currentDesc = this.state.currentDesc;
         return(
-            <div className={css}>
+            <div className={css+" time-btns"}>
                 <ul>
                     <li>
-                        <Btn click={this.clickDay} data="日"/>
+                        <Btn css="selected" click={this.clickDay} data="日"/>
                     </li>
                     <li>
                         <Btn click={this.clickWeek} data="周"/>

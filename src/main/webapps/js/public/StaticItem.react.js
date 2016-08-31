@@ -14,9 +14,9 @@ var StaticItem = React.createClass({
         var showTag = this.props.tag;
         
         return(
-            <div className={css+" static"}>
-                <p className="title">{obj.title}</p>
-                <h1 className="data">{obj.data}</h1>
+            <div className={css+" staticItem"}>
+                <div className="title">{obj.title}</div>
+                <div className="data">{obj.data}</div>
                 {
                     showTag?<i></i>:""
                 }

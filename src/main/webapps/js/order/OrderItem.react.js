@@ -20,7 +20,7 @@ var OrderItem = React.createClass({
         var css = Util.isNullOrEmpty(this.props.css) ? "" :this.props.css;
         
         return(
-            <div>
+            <div className="order-item">
                 <div>
                 <p>单号:{data.orderId}</p>
                 <p>总计:{data.amountAcutal}</p>

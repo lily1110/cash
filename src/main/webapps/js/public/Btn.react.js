@@ -8,7 +8,7 @@ var Btn = React.createClass({
     click: function(event) {
         var obj = this.props.obj;
         if($.isFunction(this.props.click) ) {
-            this.props.click(obj);
+            this.props.click(obj,event);
         }
     },
     render:function() {

@@ -1,20 +1,111 @@
+body {
+    background-color: #EFEFEF;
+}
 header {
     background-color: #e1e1e1;
 }
 header div {
     display: inline-block;
     width: 33.33%;
-    line-height: 1;
     color: #21232a;
+    line-height: 2;
+    font-size: 15px;
+    font-weight: bold;
 }
 header div.center {
     text-align: center;
 }
-.static {
-    background-color: #272930;
-    border-bottom: #21232A 1px solid;
+a a:focus, a:hover {
+    text-decoration: none;
 }
-div .static :last-child {
-    border-right: #21232A 1px solid;
+.staticItem {
+    background-color: #21232A;
+    border-bottom: #272930 1px solid;
+    border-right: #272930 1px solid;
+    color:#3CC2DB;
+    padding-top: 10px;
+    text-align: center;
+}
+div .staticItem :last-child {
+    border-right: none;
+}
+.time-btns ul {
+	list-style:none;
+	padding: 10px 0;
+    margin: 0 -15px;
+    background: #21232A;
+}
+.time-btns ul li {
+	display: inline-block;
+	width: 25%;
+	text-align: center;
+}
+.time-btns ul a {
+    display: inline-block;
+    width: 80%;
+    line-height: 2;
+    background-color: #656364;
+    color: white;
+}
 
+.time-btns ul a.selected {
+    width: 80%;
+    height: 80%;
+    background-color: #3CC2DB;
+    color: white;
+}
+.time-btns>div {
+    padding: 10px 0;
+    margin: 0 -15px;
+    background: #2C2D35;
+}
+
+.time-btns>div>a {
+	display: inline-block;
+	width: 25%;
+	text-align: center;
+    color: #3CC2DB;
+
+}
+.time-btns>div>div {
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+    color: white;
+}
+.order-item>div {
+    background-color: #3CC2DB;
+    color: white;
+
+}
+.order-item ul {
+    list-style:none;
+    padding: 10px;
+    background: white;
+}
+.order-item ul li {
+    line-height: 2;
+}
+.order-item>ul>li>i {
+    display: inline-block;
+    width: 40%;
+}
+
+.order-item>ul>li>i {
+    display: inline-block;
+    width: 30%;
+    color: #8c8c8c;
+}
+
+.order-item>ul>li>p {
+    display: inline-block;
+    width: 70%;
+    color: black;
+
+}
+
+.order-item>div>p {
+    display: inline-block;
+    line-height: 2;
+    margin-bottom: 0;
 }

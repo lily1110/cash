@@ -52,11 +52,11 @@ var Home = React.createClass({
             <div className="col-md-12 col-xs-12 col-sm-12">
                 <Header />
                 <div className="row">
-                    <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"今日应收（元）", "data":homeData.receivable}}/>
-                    <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"今日实收（元）", "data":homeData.actual}}/>
+                    <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"今日应收（元）", "data":parseFloat(homeData.receivable).toFixed(2)}}/>
+                    <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"今日实收（元）", "data":parseFloat(homeData.actual).toFixed(2)}}/>
                 </div>   
                 <div className="row">
-                    <StaticItem css="col-md-4 col-xs-4 col-sm-4"  obj={{"title":"未结金额","data":homeData.notFinishedReceivable}}/>
+                    <StaticItem css="col-md-4 col-xs-4 col-sm-4"  obj={{"title":"未结金额","data":parseFloat(homeData.notFinishedReceivable).toFixed(2)}}/>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"未结／已结", "data":homeData.notFinishedOrderQty+"/"+(homeData.orderQty-homeData.notFinishedOrderQty)}}/>
                     <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"就餐人数", "data":homeData.pplNum}}/>
                 </div> 

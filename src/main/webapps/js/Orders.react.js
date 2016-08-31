@@ -21,10 +21,10 @@ var Orders = React.createClass({
     },
     componentDidMount: function() {
         this.queryOrders();
-      
+
     },
     componentWillUnmount:function() {
-        
+
     },
     queryOrders:function() {
         var self = this;
@@ -77,11 +77,13 @@ var Orders = React.createClass({
             listView.push(<OrderItem obj={t} css="col-md-12 col-xs-12 col-sm-12"/>)
         });
         return(
-            <div className="row"> 
+            <div className="row">
                 <div className="col-md-12 col-xs-12 col-sm-12">{this.props.params.tag}</div>
+        <div className="col-md-12 col-xs-12 col-sm-12">
             {
                 listView
             }
+            </div>
             </div>
         );
 
