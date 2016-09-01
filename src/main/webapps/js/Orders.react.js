@@ -8,7 +8,7 @@ var Util = require("./public/Util");
 var OrderStore = require("./order/OrderStore");
 var OrderItem = require("./order/OrderItem.react");
 var _ = require("underscore");
-
+var Header = require("./public/Header.react");
 
 function getStateFromStores() {
     return {
@@ -78,7 +78,10 @@ var Orders = React.createClass({
         });
         return(
             <div className="row">
-                <div className="col-md-12 col-xs-12 col-sm-12">{this.props.params.tag}</div>
+                <div className="col-md-12 col-xs-12 col-sm-12">
+                    <Header title={this.props.params.tag} />
+
+                </div>
         <div className="col-md-12 col-xs-12 col-sm-12">
             {
                 listView

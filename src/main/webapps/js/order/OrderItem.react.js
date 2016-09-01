@@ -21,20 +21,20 @@ var OrderItem = React.createClass({
         
         return(
             <div className="order-item">
-                <div>
-                <p>单号:{data.orderId}</p>
-                <p>总计:{data.amountAcutal}</p>
+                <div className="info">
+                <p className="no left">单号:{data.orderId}</p>
+                <p  className="total right">总计:{data.amountActual}</p>
                 </div>
                 <ul>
-                    <li><i>收银员：</i><p>{data.operator}</p></li>
-                    <li><i>桌号：</i><p>{data.tableNo}</p></li>
-                    <li><i>结账方式：</i><p>{data.paymentType}</p></li>
-                    <li><i>开台时间：</i><p>{data.createDate}</p></li>
-                    <li><i>结账时间</i><p>{data.operDate}</p></li>
+                    <li><p className="desc">收银员：</p><p className="value">{data.operator}</p></li>
+                    <li><p className="desc">桌号：</p><p className="value">{data.tableNo}</p></li>
+                    <li><p className="desc">结账方式：</p><p className="value">{data.paymentType}</p></li>
+                    <li><p className="desc">开台时间：</p><p className="value">{data.createDate}</p></li>
+                    <li><p className="desc">结账时间</p><p className="value"de>{data.operDate}</p></li>
                 </ul>
-                <div>
-                    <p>{data.discountType}</p>
-                    <p>{data.discountAmount}</p>
+                <div className="discount">
+                    <p className="type left">{data.discountType}</p>
+                    <p className="amount right">{"￥"+ parseFloat(data.discountAmount).toFixed(2)}</p>
                 </div>
             </div>
         );

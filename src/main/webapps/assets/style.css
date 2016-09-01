@@ -137,39 +137,50 @@ div .staticItem :last-child {
 	text-align: center;
     color: white;
 }
-.order-item>div {
+.order-item {
+    margin-top: 10px;
+    background: white;
+}
+
+.order-item .left {
+    padding-left: 10px;
+}
+.order-item .right {
+    float: right;
+    padding-right: 10px;
+}
+.order-item .info {
     background-color: #3CC2DB;
     color: white;
-
+    line-height: 2;
 }
 .order-item ul {
     list-style:none;
-    padding: 10px;
-    background: white;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+    border-bottom: #EFEFEF 1px solid;
 }
 .order-item ul li {
-    line-height: 2;
+    padding-top: 10px;
 }
-.order-item>ul>li>i {
-    display: inline-block;
-    width: 40%;
-}
-
-.order-item>ul>li>i {
+.order-item>ul>li> .desc {
     display: inline-block;
     width: 30%;
     color: #8c8c8c;
 }
 
-.order-item>ul>li>p {
+.order-item>ul>li> .value {
     display: inline-block;
     width: 70%;
     color: black;
-
 }
-
-.order-item>div>p {
+.order-item p {
     display: inline-block;
-    line-height: 2;
     margin-bottom: 0;
+}
+.order-item .discount {
+    line-height: 2;
+    font-size: 16px;
+    /*font-weight: bold;*/
 }
