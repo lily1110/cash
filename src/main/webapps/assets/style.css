@@ -8,7 +8,7 @@ header div {
     display: inline-block;
     width: 33.33%;
     color: #21232a;
-    line-height: 3;
+    line-height: 2.5;
     font-size: 15px;
     font-weight: bold;
 }
@@ -25,12 +25,13 @@ a a:focus, a:hover {
     color:#3CC2DB;
     padding: 10px 0;
     text-align: center;
-    height: 90px;
+    height: 100px;
 }
 .staticItem .title {
     font-size: 14px;
     color: #494c4f;
-    height: 25px;
+    height: 30px;
+    line-height: 30px;
 }
 .staticItem .data {
     font-size: 30px;
@@ -46,8 +47,13 @@ a a:focus, a:hover {
     padding-top: 0;
     margin-bottom: 10px;
     border-bottom: none;
-    height: 70px;
+    height: 80px;
 
+}
+.report .staticItem i {
+	font-size: 22px;
+	font-style: normal;
+    font-weight: normal;
 }
 
 .static-row-1 .staticItem .data {
@@ -59,10 +65,8 @@ div .staticItem :last-child {
 .menu-item {
     text-align: center;
     background: white;
-    padding-top: 5px;
-    padding-bottom: 10px;
-
-
+    padding-top: 10px;
+    padding-bottom: 15px;
 }
 .menu-item div {
     padding-top: 5px;

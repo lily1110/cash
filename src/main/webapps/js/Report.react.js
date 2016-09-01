@@ -164,14 +164,14 @@ var Report = React.createClass({
 
     render:function() {
         return(
-            <div className="row"> 
+            <div className="row report"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
                     <Header title="营业日报" />
                      <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
 
                     <div className="row"> 
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"日最高值","data":"¥"+this.state.max}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"日平均值","data":"¥"+this.state.avg}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"日最高值","data":(<div><i>¥</i>{this.state.max}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"日平均值","data":(<div><i>¥</i>{this.state.avg}</div>)}} />
                     </div>
                     <div className="row"> 
                         <LineChart css="col-md-12 col-xs-12 col-sm-12" title="营业日报"
@@ -181,14 +181,14 @@ var Report = React.createClass({
                              />
                     </div>
                     <div className="row"> 
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":"¥"+this.state.receivable}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":"¥"+this.state.actual}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"退菜合计","data":"¥"+this.state.reback}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"优惠合计","data":"¥"+this.state.discount}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总单数","data":"¥"+this.state.orderQty}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总人数","data":"¥"+this.state.pplNum}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"单均消费","data":"¥"+this.state.orderAvg}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"人均消费","data":"¥"+this.state.pplAvg}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":(<div><i>¥</i>{this.state.receivable}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":(<div><i>¥</i>{this.state.actual}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"退菜合计","data":(<div><i>¥</i>{this.state.reback}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"优惠合计","data":(<div><i>¥</i>{this.state.discount}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总单数","data":(<div><i>¥</i>{this.state.orderQty}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总人数","data":this.state.pplNum}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"单均消费","data":(<div><i>¥</i>{this.state.orderAvg}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"人均消费","data":(<div><i>¥</i>{this.state.pplAvg}</div>)}} />
                     
                     </div>
 
