@@ -63,7 +63,8 @@ var Home = React.createClass({
                 <div className="row">
                     <MenuItem css="col-md-6 col-xs-6 col-sm-6 customer" link="/customerFlow" obj={{"title":"客流量", "data":homeData.pplNum,"icon":(<i className="fa fa-users" ariaHidden="true"></i>)}}/>
                     <MenuItem css="col-md-6 col-xs-6 col-sm-6 abnormal" link="/abstatic" obj={{"title":"异常监控", "data":homeData.abOrderQty,"icon":(<i className="fa fa-exclamation-triangle" ariaHidden="true"></i>)}}/>
-                    <MenuItem css="col-md-6 col-xs-6 col-sm-6 payment" link="/paymentForm" obj={{"title":"收款构成", "data":homeData.cashType+"现金","icon":(<i className="fa fa-pie-chart" ariaHidden="true"></i>)}}/>
+                    <MenuItem css="col-md-6 col-xs-6 col-sm-6 payment" link="/paymentForm" obj={{"title":"收款构成", 
+                    "data":parseFloat(homeData.cashType).toFixed(2)+"现金","icon":(<i className="fa fa-pie-chart" ariaHidden="true"></i>)}}/>
                     <MenuItem css="col-md-6 col-xs-6 col-sm-6 report" link="/report" obj={{"title":"营业日报", "data":homeData.receivable,"icon":(<i className="fa fa-line-chart" ariaHidden="true"></i>)}}/>
                     
                 </div>   

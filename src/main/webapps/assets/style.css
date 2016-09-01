@@ -15,10 +15,14 @@ header div {
 header div.center {
     text-align: center;
 }
+header i {
+    color: #6f6f6f;
+}
 a a:focus, a:hover {
     text-decoration: none;
 }
 .staticItem {
+    position: relative;
     background-color: #21232A;
     border-bottom: #272930 1px solid;
     border-right: #272930 1px solid;
@@ -37,6 +41,17 @@ a a:focus, a:hover {
     font-size: 30px;
     font-weight: bold;
     height: 50px;
+    color:#3CC2DB;
+}
+.staticItem i {
+    float: right;
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    font-size: 20px;
+    color:#3CC2DB;
 }
 .static-row-1 {
     background-color: #21232A;
@@ -77,7 +92,7 @@ div .staticItem :last-child {
     font-weight: bold;
 }
 .menu-item .title {
-    font-size: 14px;
+    font-size: 12px;
 }
 .customer.menu-item .icon {
     color: #5f7ebb;
@@ -144,10 +159,15 @@ div .staticItem :last-child {
 .order-item {
     margin-top: 10px;
     background: white;
+    padding-bottom: 5px;
 }
 
 .order-item .left {
     padding-left: 10px;
+}
+.order-item i {
+    font-size: 12px;
+    padding-right: 10px;
 }
 .order-item .right {
     float: right;
@@ -186,5 +206,75 @@ div .staticItem :last-child {
 .order-item .discount {
     line-height: 2;
     font-size: 16px;
-    /*font-weight: bold;*/
 }
+.chart {
+    background: white;
+    padding: 10px 5px;
+    font-size: 12px;
+    color: #848484;
+}
+.chart .unit {
+    display: inline-block;
+}
+.chart .legend {
+    float: right;
+}
+.chart .legend,.chart .legend dl,.chart .legend dt,.chart .legend dd {
+    display: inline-block;
+}
+.chart .legend dt {
+    height: 8px;
+    width: 8px;
+    margin-left: 5px;
+    margin-right: 3px;
+}
+.payment .menu-item, .abnormal .menu-item{
+    background: #e6e6e6;
+    border-right: #ededed 1px solid;
+}
+.payment .menu-item  :last-child, .abnormal .menu-item :last-child {
+    border-right: none;
+}
+
+.payment .menu-item .data,.abnormal .menu-item .data{
+    color: #3CC2DB;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.payment .list .title {
+    text-align: center;
+    line-height: 2.5;
+    background: #21232A;
+    color: #A7A5A6;
+}
+.payment .list dl div {
+    background: #21232A;
+}
+.payment .list dl div:hover {
+    background: #363840;
+}
+
+.payment .list dt {
+    color: #A7A5A6;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 2.8;
+
+}
+.payment .list dd{
+    text-align: right;
+    color: #3CC2DB;
+    font-size: 12px;
+    line-height: 2.8;
+}
+.customer-static {
+    padding: 15px 0;
+    background: #21232A;
+}
+.customer-static .staticItem {
+    padding: 0;
+    height: auto;
+    border-bottom: none;
+}
+

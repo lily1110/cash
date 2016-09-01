@@ -5,16 +5,20 @@ var Link = ReactRouter.Link;
 var Header = React.createClass({
 
     render:function() {
-        var left = this.props.left?this.props.left:(<div />);
+        var left = this.props.left?this.props.left:"";
+        var backTo= "/";
         var title = this.props.title?this.props.title:("屏芯智能餐厅");
         var right = this.props.right?this.props.right:(<div />);
+        if(left=="back") {
+            backTo = this.props.backTo?this.props.backTo:"/";
+        }
         
         return(
             <div className="row">
 
             <header className="col-md-12 col-xs-12 col-sm-12">
             <div>
-            {left}
+            {left=="back"?(<Link to={backTo}><i className="fa fa-chevron-left" ariaHidden="true"></i></Link>):""}
             </div>
             <div className="center">
             {

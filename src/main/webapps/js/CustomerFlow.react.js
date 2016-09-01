@@ -135,11 +135,9 @@ var CustomerFlow = React.createClass({
         return(
             <div className="row"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
-                    <div className="row"> 
-                        <Header title="客流量" />
-                    </div>
+                    <Header  left="back" backTo="/" title="客流量" />
                     <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
-                    <div className="row"> 
+                    <div className="row customer-static"> 
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日最高值","data":this.state.max+"/人"}} />
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"日平均值","data":this.state.avg+"/人"}} />
                         <StaticItem css="col-md-4 col-xs-4 col-sm-4" obj={{"title":"就餐人数","data":this.state.pplNum+"/人"}} />
@@ -149,6 +147,7 @@ var CustomerFlow = React.createClass({
                             titles={this.titles}
                             labels={this.state.labels} 
                             datas={this.state.datas}
+                            unit={"人数"}
                              />
                     </div>
                 </div>

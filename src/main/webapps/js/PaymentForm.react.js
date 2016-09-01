@@ -81,34 +81,45 @@ var PaymentForm = React.createClass({
         _.map(this.state.list, function(v,k) {
             var t = (
                 <div className="row"> 
-                    <div className="col-md-6 col-xs-6 col-sm-6">
+                    <dt className="col-md-6 col-xs-6 col-sm-6">
                     {k}
-                    </div>
-                    <div className="col-md-6 col-xs-6 col-sm-6">
-                    {v}
-                    </div>
+                    </dt>
+                    <dd className="col-md-6 col-xs-6 col-sm-6">
+                    {"￥ "+parseFloat(v).toFixed(2)}
+                    </dd>
                 </div>
                 )
             staticHtml.push(t);
         });
         return(
-            <div className="row"> 
+            <div className="row payment"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
-                    <Header title="收款构成" />
+                    <Header  left="back" backTo="/" title="收款构成" />
                     <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
-
-                    <BarChart title="收款构成" data={this.state.list} />
                     <div className="row"> 
-                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":this.state.receivable}} />
-                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":this.state.actual}} />
+                        <BarChart css="col-md-12 col-xs-12 col-sm-12" 
+                            title="收款构成" 
+                            data={this.state.list} 
+                            unit={"¥"}
+                         />
                     </div>
+        
                     <div className="row"> 
-                        <div className="col-md-12 col-xs-12 col-sm-12">
+                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" 
+                        obj={{"title":"应收合计","data":"￥"+parseFloat(this.state.receivable).toFixed(2)}} />
+                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" 
+                        obj={{"title":"实收合计","data":"￥"+parseFloat(this.state.actual).toFixed(2)}} />
+                    </div>
+                    <div className="row list"> 
+                        <div className="col-md-12 col-xs-12 col-sm-12 title">
                         收款构成
                         </div>
                     </div>
-                        
+                    <div className="row list"> 
+                        <dl className="col-md-12 col-xs-12 col-sm-12">    
                         {staticHtml}
+                        </dl>
+                    </div>
                 </div>
             </div>
         );

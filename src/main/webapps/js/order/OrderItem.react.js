@@ -33,7 +33,7 @@ var OrderItem = React.createClass({
                     <li><p className="desc">结账时间</p><p className="value"de>{data.operDate}</p></li>
                 </ul>
                 <div className="discount">
-                    <p className="type left">{data.discountType}</p>
+                    <p className="type left"><i className="fa fa-circle" ariaHidden="true"></i>{data.discountType}</p>
                     <p className="amount right">{"￥"+ parseFloat(data.discountAmount).toFixed(2)}</p>
                 </div>
             </div>

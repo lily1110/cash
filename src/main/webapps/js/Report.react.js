@@ -21,7 +21,7 @@ function getStateFromStores() {
         pplNum:0,
         orderAvg:0,
         pplAvg:0,
-        titles:["实付","应付"],
+        titles:["实收金额","应收金额"],
         dailyLabels:["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00","0:00","1:00","2:00","3:00"],
         weeklyLabels:["周一","周二","周三","周四","周五","周六","周日"],
         monthlyLabels:["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
@@ -166,7 +166,7 @@ var Report = React.createClass({
         return(
             <div className="row report"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
-                    <Header title="营业日报" />
+                    <Header  left="back" backTo="/" title="营业日报" />
                      <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
 
                     <div className="row"> 
@@ -178,6 +178,7 @@ var Report = React.createClass({
                             titles={this.state.titles}
                             labels={this.state.labels} 
                             datas={this.state.datas}
+                            unit={"¥"}
                              />
                     </div>
                     <div className="row"> 

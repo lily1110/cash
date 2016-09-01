@@ -70,12 +70,25 @@ var LineChart = React.createClass({
         }
         self.datasets = sets;
     },
+    getLegend: function() {
+        var view= [];
+        var titles = this.props.titles;
+        var colors = this.pointColor;
+        for(var i=0;i<titles.length&&i<colors.length;i++){
+            var c = (<dt style={{backgroundColor:colors[i]}}></dt>);
+            var d = (<dd>{titles[i]}</dd>)
+            var v = (<dl>{c}{d}</dl>)
+            view.push(v);
+        }
+        return view;
+    },
     render: function() {
         var self = this;
         var css = self.props.css;
         var datas = self.props.datas;
         var titles = self.props.titles;
         var labels = self.props.labels;
+        var unit = self.props.unit?"单位："+self.props.unit:"";
         self.getHandleSets(titles,datas);
         var chartData =  {
             labels: labels,
@@ -86,7 +99,11 @@ var LineChart = React.createClass({
         }
 
         return (
-            <div css={css}>
+            <div className={css+" chart"}>
+                <div className="unit">{unit}</div>
+                <div className="legend">
+                 {this.getLegend()}
+                </div>
                 <Line data={chartData} options={this.chartOptions}/>
             </div>
         )

@@ -3,6 +3,7 @@ var ReactRouter = require("react-router");
 var BarChart = require("./public/BarChart.react");
 var Util = require("./public/Util");
 var MenuItem = require("./public/MenuItem.react");
+var StaticItem = require("./public/StaticItem.react");
 var Header = require("./public/Header.react");
 var TimeTab = require("./public/TimeTab.react");
 var _ = require("underscore");
@@ -78,20 +79,27 @@ var AbStatics = React.createClass({
     },
     render:function() {
         var staticHtml = [];
+        var i=0;
         _.map(this.state.abs, function(v,k) {
             var t = (
-                <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":k,"data":v}} link={"/order/"+k}/>)
+                <StaticItem tag={true} css="col-md-6 col-xs-6 col-sm-6" obj={{"title":k,"data":v}} link={"/order/"+k}/>)
             staticHtml.push(t);
+            i++;
         });
+        if((i)%2==1) {
+            staticHtml.push(<StaticItem css="col-md-6 col-xs-6 col-sm-6"/>)
+        } 
         return(
-            <div className="row"> 
+            <div className="row abnormal"> 
                 <div className="col-md-12 col-xs-12 col-sm-12">
-                    <Header title="异常监控" />
+                    <Header left="back" backTo="/" title="异常监控" />
                     <TimeTab css="tab" click={this.clickTab} current="2016-05-29"/>
-                    <BarChart title="异常监控" data={this.state.abs} />
                     <div className="row"> 
-                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":this.state.receivable}} />
-                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":this.state.actual}} />
+                        <BarChart css="col-md-12 col-xs-12 col-sm-12" title="异常监控" data={this.state.abs} unit={"¥"} />
+                    </div>
+                    <div className="row"> 
+                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"应收合计","data":"￥"+parseFloat(this.state.receivable).toFixed(2)}} />
+                        <MenuItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":"￥"+parseFloat(this.state.actual).toFixed(2)}} />
                     </div>
                     <div className="row"> 
                         {staticHtml}
