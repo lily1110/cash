@@ -2,6 +2,9 @@ var $ = require("jquery");
 var _ = require("underscore");
 var host_addr ="";
 module.exports = {
+    isNotEmptyArray: function(list) {
+        return $.isArray(list)&&list.length>0;
+    },
     sendData: function (_method, _url, _data, _success, _error) {
         var json_data = JSON.stringify(_data);
         $.ajax({

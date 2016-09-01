@@ -62,11 +62,11 @@ var Report = React.createClass({
         var tag = params.tag;
         _.each(list, function(t){
             pplNum += parseInt(t.pplNum);
-            actual += parseInt(t.amountActual);
-            receivable+= parseInt(t.amount);
+            actual += parseFloat(t.amountActual);
+            receivable+= parseFloat(t.amount);
             orderQty += parseInt(t.orderQty);
-            discount += parseInt(t.discount);
-            reback += parseInt(t.numberBack);
+            discount += parseFloat(t.discount);
+            reback += parseFloat(t.numberBack);
             var d = new Date(t.date);
             var week = Util.formatDate(d,"EE");
             var month = Util.formatDate(d,"MM");
@@ -78,8 +78,8 @@ var Report = React.createClass({
             t["month"] = parseInt(month)+"";
             t["day"] = parseInt(day)+"";
         });
-        var orderAvg = actual/orderQty;
-        var pplAvg = actual/pplNum;
+        var orderAvg =  parseFloat(orderQty==0?0:(actual/orderQty));
+        var pplAvg = parseFloat(pplNum==0?0:(actual/pplNum));
         var datas=[];
         var receivableData=[];
         var actualData=[];
@@ -115,8 +115,8 @@ var Report = React.createClass({
                     if(!Util.isNullOrEmpty(groups[l]) ) {
                         var g = groups[l];
                         _.each(g,function(t) {
-                            receivable+= parseInt(t.amount)
-                            actual+= parseInt(t.amountActual)
+                            receivable+= parseFloat(t.amount)
+                            actual+= parseFloat(t.amountActual)
                         });
                     }
                     receivableData.push(receivable);
@@ -128,12 +128,13 @@ var Report = React.createClass({
             "labels":labels,
             "datas":datas,
             "pplNum":pplNum,
-            "receivable":receivable,
+            "receivable":parseFloat(receivable).toFixed(2),
+            "actual":parseFloat(actual).toFixed(2),
             "orderQty":orderQty,
-            "discount":discount,
-            "reback":reback,
-            "orderAvg":parseInt(orderAvg),
-            "pplAvg":parseInt(pplAvg),
+            "discount":discount.toFixed(2),
+            "reback":reback.toFixed(2),
+            "orderAvg":orderAvg.toFixed(2),
+            "pplAvg":pplAvg.toFixed(2),
         });
     }, 
     queryList:function(params) {
@@ -145,8 +146,8 @@ var Report = React.createClass({
             console.log(v1.status)
         });
         Util.getData("api/reportStatic.json",{},function(data){
-            var max = parseInt(data.max);
-            var avg = parseInt(data.avg);
+            var max = parseFloat(data.max).toFixed(2);
+            var avg = parseFloat(data.avg).toFixed(2);
             self.setState({"max":max,"avg":avg});
         },function(v1,v2,v3){
             console.log(v1.status)
@@ -186,7 +187,7 @@ var Report = React.createClass({
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"实收合计","data":(<div><i>¥</i>{this.state.actual}</div>)}} />
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"退菜合计","data":(<div><i>¥</i>{this.state.reback}</div>)}} />
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"优惠合计","data":(<div><i>¥</i>{this.state.discount}</div>)}} />
-                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总单数","data":(<div><i>¥</i>{this.state.orderQty}</div>)}} />
+                        <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总单数","data":this.state.orderQty}} />
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"总人数","data":this.state.pplNum}} />
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"单均消费","data":(<div><i>¥</i>{this.state.orderAvg}</div>)}} />
                         <StaticItem css="col-md-6 col-xs-6 col-sm-6" obj={{"title":"人均消费","data":(<div><i>¥</i>{this.state.pplAvg}</div>)}} />

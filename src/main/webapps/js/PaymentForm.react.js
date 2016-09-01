@@ -45,15 +45,15 @@ var PaymentForm = React.createClass({
         var receivable = 0;
         var actual = 0;
         _.each(orderList, function(t){
-            receivable += parseInt(t.amount);
-            actual += parseInt(t.amountActual); 
+            receivable += parseFloat(t.amount);
+            actual += parseFloat(t.amountActual); 
         });
         var groups = _.groupBy(list, "paymentType");
         var hashMap = {};
         _.map(groups, function(v,k) {
             var amount = 0;
             _.each(v,function(t) {
-                amount+= parseInt(t.amountActual);
+                amount+= parseFloat(t.amountActual);
             });
             hashMap[k] = amount;
         });

@@ -1,6 +1,7 @@
 var React = require("react");
 var _ = require("underscore");
 var $ = require("jquery");
+var Util = require("./Util");
 
 var Bar = require("react-chartjs").Bar;
 
@@ -62,9 +63,11 @@ var BarChart = React.createClass({
         };
         return (
             <div className={css+" chart"}>
-                <div className="unit">{unit}</div>
                 {
-                    hashMap?( <Bar data={chartData} options={chartOptions}/>):""
+                    Util.isNotEmptyArray(self.datas)?(<div className="unit">{unit}</div>):""
+                }
+                {
+                    Util.isNotEmptyArray(self.datas)?(<Bar data={chartData} options={chartOptions}/>):(<div className="no-data">没有数据</div>)
                 }
                
             </div>

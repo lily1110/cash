@@ -22,7 +22,7 @@ var StaticItem = React.createClass({
                             <div className="title">{obj.title}</div>
                             <div className="data">{obj.data}</div>
                             {
-                                showTag?<i className="fa fa-chevron-right" ariaHidden="true"></i>:""
+                                showTag?<i className="fa fa-chevron-right tag-right" ariaHidden="true"></i>:""
                             }
                         </div>
                         ):(
@@ -30,7 +30,7 @@ var StaticItem = React.createClass({
                             <div className="title">{obj.title}</div>
                             <div className="data">{obj.data}</div>
                             {
-                                showTag?<i className="fa fa-chevron-right" ariaHidden="true"></i>:""
+                                showTag?<i className="fa fa-chevron-right tag-right" ariaHidden="true"></i>:""
                             }
                         </Link>
                         )
