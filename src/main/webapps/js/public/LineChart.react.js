@@ -95,7 +95,7 @@ var LineChart = React.createClass({
             datasets: self.datasets
         };
         if(!$.isArray(datas)||datas.length<1||!$.isArray(labels)||labels.length<1) {
-            return <div/>
+            return (<div className="no-data">没有数据</div>)
         }
 
         return (

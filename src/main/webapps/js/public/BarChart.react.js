@@ -54,10 +54,10 @@ var BarChart = React.createClass({
             labels: self.labels,
             datasets: [{
                     data: self.datas,
-                    fillColor : "rgba(220,220,220,0.5)",
-                    strokeColor : "rgba(220,220,220,0.8)",
-                    highlightFill : "rgba(151,187,205,0.75)",
-                    highlightStroke : "rgba(151,187,205,1)",
+                    fillColor : "#3CC2DB",
+                    strokeColor : "#3CC2DB",
+                    highlightFill : "#45e1fe",
+                    highlightStroke : "#45e1fe",
                 }
             ]
         };
