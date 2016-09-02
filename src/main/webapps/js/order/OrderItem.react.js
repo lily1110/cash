@@ -23,13 +23,12 @@ var OrderItem = React.createClass({
             <div className="order-item">
                 <div className="info">
                 <p className="no left">单号:{data.orderId}</p>
-                <p  className="total right">总计:{data.amountActual}</p>
+                <p  className="total right">总计:{"￥"+parseFloat(data.amountActual).toFixed(2)}</p>
                 </div>
                 <ul>
                     <li><p className="desc">收银员：</p><p className="value">{data.operator}</p></li>
                     <li><p className="desc">桌号：</p><p className="value">{data.tableNo}</p></li>
                     <li><p className="desc">结账方式：</p><p className="value">{data.paymentType}</p></li>
-                    <li><p className="desc">开台时间：</p><p className="value">{data.createDate}</p></li>
                     <li><p className="desc">结账时间</p><p className="value"de>{data.operDate}</p></li>
                 </ul>
                 <div className="discount">
