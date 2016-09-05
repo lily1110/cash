@@ -7,7 +7,7 @@ var Header = React.createClass({
     render:function() {
         var left = this.props.left?this.props.left:"";
         var backTo= "/";
-        var title = this.props.title?this.props.title:("屏芯智能餐厅");
+        var title = this.props.title?this.props.title:("鱼堂科技");
         var right = this.props.right?this.props.right:(<div />);
         if(left=="back") {
             backTo = this.props.backTo?this.props.backTo:"/";

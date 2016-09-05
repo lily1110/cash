@@ -49,6 +49,7 @@ var BarChart = React.createClass({
 
         var chartOptions = {
             responsive : true,
+            barValueSpacing:20,
         };
         var chartData =  {
             labels: self.labels,
